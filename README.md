@@ -34,5 +34,31 @@ keys, edit the source code yourself. The function you need to perfect is `DWORD 
 You can find it in `KBM.h` and `KeyBoardMonitor.c`. 
 
 ### Example
+```C
+// ./test_file.c
+#include <stdio.h>
+#include "KBM.h"
+
+void main()
+{
+    MonitorStart();
+    while (condition)
+    {  
+        printf("%d\n", KBM_KEYS_STATE[VK_A]);
+        YourFunction();  // Complete with you functions
+    }
+    MonitorEnd();
+}
+```
+Then put all of the files, i.e. test_file.c KBM.h kbm.dll together in your project folder.
+
+```bash
+gcc -o test test_file.c -L./ -lkbm
+```
+Then run the order. It will generate a test.exe file in project folder. Dubble tap to run.
+
+### Statement
+The programm should not be used as any illegal purposes. Including but not limited to monitoring users privacy.
+Any consequences resulting from improper purposes will be considered as personal behavior.
 
 
