@@ -42,10 +42,10 @@ You can find it in `KBM.h` and `KeyBoardMonitor.c`.
 void main()
 {
     MonitorStart();
-    while (condition)
+    while (1)
     {  
         printf("%d\n", KBM_KEYS_STATE[VK_A]);
-        YourFunction();  // Complete with you functions
+        // YourFunction();  // Complete with you functions
     }
     MonitorEnd();
 }
