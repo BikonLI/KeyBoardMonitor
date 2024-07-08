@@ -33,7 +33,7 @@ is that not all of keys' state in the array will be update. The programm only fo
 keys, edit the source code yourself. The function you need to perfect is `DWORD WINAPI KeyStateUpdate(LPVOID lpParam);`.
 You can find it in `KBM.h` and `KeyBoardMonitor.c`. What really needs to mention is that this array is been protected by 
 the mutex, which means it can only be access by one thread. So if you get more than on thread that is associated with this
-array, you have to consider race condition, i.e. deadlock. Don't try to set a new array to detect changes of KBM_KEYS_STATE.
+array, you have to consider race condition, i.e. deadlock. Don't try to set a new array to detect changes of `KBM_KEYS_STATE`.
 
 ##### KBM_MONITOR_THREAD_HANDLE
 ```
