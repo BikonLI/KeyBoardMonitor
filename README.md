@@ -31,18 +31,21 @@ For each key on the keyboard, it has a virtual code which ranged between 0 to 19
 But you can access the array by macro definitions. You can see all of it in **KBM.h** file. What you have to be carefull
 is that not all of keys' state in the array will be update. The programm only focuses on common keys. If you need more 
 keys, edit the source code yourself. The function you need to perfect is `DWORD WINAPI KeyStateUpdate(LPVOID lpParam);`.
-You can find it in `KBM.h` and `KeyBoardMonitor.c`. 
+You can find it in `KBM.h` and `KeyBoardMonitor.c`. What really needs to mention is that this array is been protected by 
+the mutex, which means it can only be access by one thread. So if you get more than on thread that is associated with this
+array, you have to consider race condition, i.e. deadlock. Don't try to set a new array to detect changes of KBM_KEYS_STATE.
 
+##### KBM_MONITOR_THREAD_HANDLE
 ```
 HANDLE KBM_MONITOR_THREAD_HANDLE;
 ```
 This is the thread handle where you can use Windows api to control the thread.
 
+##### KBM_MONITOR_THREAD_ID
 ```
 DWORD KBM_MONITOR_THREAD_ID;
 ```
 This is the thread handle.
-
 
 ### Example
 ```C
