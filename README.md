@@ -24,7 +24,7 @@ End up the thread.
 ##### KBM_KEYS_STATE[256]
 
 ```C
-unsigned short KBM_KEYS_STATE[256];
+uint8_t KBM_KEYS_STATE[256];
 ```
 This is a global property. The type is bool, 1 means the key is on pressed and 0 means the key is not on pressed.
 For each key on the keyboard, it has a virtual code which ranged between 0 to 196, but **it is noncontinuous**.
@@ -32,6 +32,17 @@ But you can access the array by macro definitions. You can see all of it in **KB
 is that not all of keys' state in the array will be update. The programm only focuses on common keys. If you need more 
 keys, edit the source code yourself. The function you need to perfect is `DWORD WINAPI KeyStateUpdate(LPVOID lpParam);`.
 You can find it in `KBM.h` and `KeyBoardMonitor.c`. 
+
+```
+HANDLE KBM_MONITOR_THREAD_HANDLE;
+```
+This is the thread handle where you can use Windows api to control the thread.
+
+```
+DWORD KBM_MONITOR_THREAD_ID;
+```
+This is the thread handle.
+
 
 ### Example
 ```C
