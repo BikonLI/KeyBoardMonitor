@@ -202,15 +202,15 @@
 #define VK_OEM_CLEAR 0xFE
 */
 
-/* 
+/*
 There are 196 virtual key, but this script only detect key 0 ~ 9, A ~ Z, TAB, CAPS_LOCK, SHIFT_L, CTRL, ALT_L,
 SHIFT_R, BACKSPACE, ENTER, UP, DOWN, RIGHT, LEFT, ALT_R, SPACE. 0xFE is 254.
 */
 
-
 #ifndef KBM_H
 #define KBM_H
-#include <windows.h>   
+#include <windows.h>
+#include <stdint.h>
 
 #define VK_A 0x41
 #define VK_B 0x42
@@ -253,8 +253,9 @@ SHIFT_R, BACKSPACE, ENTER, UP, DOWN, RIGHT, LEFT, ALT_R, SPACE. 0xFE is 254.
 #define KBM_KEY_DOWN 1
 #define KBM_KEY_UP 0
 
-extern unsigned short KBM_KEYS_STATE[0x100];
-extern HANDLE KBM_MONITOR_THREAD;
+extern uint8_t KBM_KEYS_STATE[0x100];
+extern HANDLE KBM_MONITOR_THREAD_HANDLE;
+extern DWORD KBM_MONITOR_THREAD_ID;
 
 DWORD WINAPI KeyStateUpdate(LPVOID lpParam);
 void MonitorStart(void);
@@ -263,18 +264,19 @@ void MonitorEnd(void);
 #endif
 
 /*
-EXAMPLE: 
+EXAMPLE:
 
 void main()
 {
     MonitorStart();
     while (condition)
-    {  // Do something here.
+    {
         printf("%d\n", KBM_KEYS_STATE[VK_A]);
         YourFunction();
+        // Do something here.
     }
     MonitorEnd();
-    
+
 }
 
 */
